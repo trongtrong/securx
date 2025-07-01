@@ -12,11 +12,11 @@ abstract class AppGuardPlatform extends PlatformInterface {
 
   /// The default instance of [AppGuardPlatform] to use.
   ///
-  /// Defaults to [MethodChannelAppGuard].
+  /// Defaults to [MethodChannelAppGuardPlatform].
   static AppGuardPlatform get instance => _instance;
 
   /// Platform-specific implementations should set this with their own
-  /// platform-specific class that extends [AppGuardPlatform] when
+  /// platform-specific class that extends [AppGuardPlatformPlatform] when
   /// they register themselves.
   static set instance(AppGuardPlatform instance) {
     PlatformInterface.verifyToken(instance, _token);
@@ -25,5 +25,45 @@ abstract class AppGuardPlatform extends PlatformInterface {
 
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
+  }
+
+  Future<bool?> isDeviceSafe() {
+    throw UnimplementedError('isDeviceSafe() has not been implemented.');
+  }
+
+  Future<bool?> isDeviceRooted() {
+    throw UnimplementedError('isDeviceRooted() has not been implemented.');
+  }
+
+  Future<bool?> isDebuggingModeEnable() {
+    throw UnimplementedError('isDebuggingModeEnable() has not been implemented.');
+  }
+
+  Future<bool?> isDeveloperModeEnabled() {
+    throw UnimplementedError('isDeveloperModeEnabled() has not been implemented.');
+  }
+
+  Future<bool?> isEmulator() {
+    throw UnimplementedError('isEmulator() has not been implemented.');
+  }
+
+  Future<bool?> isVpnEnabled() {
+    throw UnimplementedError('isVpnEnabled() has not been implemented.');
+  }
+
+  Future<void> disableScreenshot() {
+    throw UnimplementedError('disableScreenshot() has not been implemented.');
+  }
+
+  Future<void> enableScreenshot() {
+    throw UnimplementedError('enableScreenshot() has not been implemented.');
+  }
+
+  Future<bool?> isDebuggerAttached() {
+    throw UnimplementedError('isDebuggerAttached() has not been implemented.');
+  }
+
+  Future<bool?> isAppCloned(String applicationID) {
+    throw UnimplementedError('isAppCloned() has not been implemented.');
   }
 }
