@@ -5,17 +5,29 @@
 Pod::Spec.new do |s|
   s.name             = 'app_guard'
   s.version          = '0.0.1'
-  s.summary          = 'A robust mobile security package designed to enhance application resilience against various threats. This package includes features for device integrity checks, secure communication, mobile privacy, and fraud prevention.'
+  
+  s.summary          = 'A robust mobile security package for Flutter apps, enhancing resilience against threats like rooting, debugging, and app cloning.'
+  
   s.description      = <<-DESC
-A robust mobile security package designed to enhance application resilience against various threats. This package includes features for device integrity checks, secure communication, mobile privacy, and fraud prevention.
+  The AppGuard Flutter plugin provides a comprehensive suite of mobile security features for Android and iOS applications. It includes functionalities for:
+  - Device integrity checks (root/jailbreak detection)
+  - Debugging and emulator detection
+  - Screenshot prevention
+  - App cloning detection
+  - And other measures to enhance application resilience and prevent fraud.
+  This plugin is designed to help developers build more secure Flutter applications by integrating native platform security capabilities.
                        DESC
-  s.homepage         = 'http://example.com'
-  s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
-  s.source           = { :path => '.' }
+  s.homepage         = 'https://github.com/Rgada28/app_guard/tree/develop' 
+  # --- UPDATED: License type changed to BSD-3-Clause ---
+  s.license          = { :type => 'BSD-3-Clause', :file => '../LICENSE' }
+  s.author           = { 'Raj Gada' => '' }
+  s.source           = { :path => '.' } 
+
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.platform = :ios, '12.0'
+  s.dependency 'DTTJailbreakDetection', '0.4.0'
+  s.dependency 'ScreenProtectorKit', '1.3.1'
+  s.platform = :ios, '12.0' 
 
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
