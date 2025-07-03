@@ -85,7 +85,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(title: const Text('App Guards Plugin')),
+        appBar: AppBar(title: const Text('App Guard Plugin')),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
