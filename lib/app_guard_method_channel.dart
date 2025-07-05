@@ -88,10 +88,11 @@ class MethodChannelAppGuard extends AppGuardPlatform {
   }
 
   @override
-  Future<bool?> isAppCloned(String applicationID) async {
-    final rooted = await methodChannel.invokeMethod<bool>('isAppCloned', {
-      "applicationID": applicationID,
+  Future<bool?> isAppCloned({required String applicationID}) async {
+    // Pass the applicationID to the native side.
+    final isCloned = await methodChannel.invokeMethod<bool>('isAppCloned', {
+      'applicationID': applicationID,
     });
-    return rooted;
+    return isCloned;
   }
 }
