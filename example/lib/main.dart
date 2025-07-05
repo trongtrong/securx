@@ -132,11 +132,11 @@ class _MyAppState extends State<MyApp> {
                 ),
                 ListTile(
                   title: const Text("Screen Capturing and Screensharing"),
-                  subtitle: !_isScreenshotDisabled
+                  subtitle: _isScreenshotDisabled
                       ? const Text("Allowed")
                       : const Text("Restricted"),
                   trailing: Switch.adaptive(
-                    value: !_isScreenshotDisabled,
+                    value: _isScreenshotDisabled,
                     onChanged: (value) {
                       _appGuardPlugin.setScreenshotProtection(enabled: _isScreenshotDisabled);
                       _isScreenshotDisabled = !_isScreenshotDisabled;
