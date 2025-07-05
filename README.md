@@ -1,4 +1,4 @@
-# Mobile Garuda - A Security Analysis Package
+# App Guard - A Security Analysis Package
 
 [![pub package](https://img.shields.io/pub/v/app_guard.svg)](https://pub.dev/packages/app_guard)
 [![pub points](https://badges.bar/app_guard/pub%20points)](https://pub.dev/packages/app_guard/score)
@@ -62,7 +62,7 @@ A robust mobile security package designed to enhance application resilience agai
 To integrate this package into your project:
 
 ```bash
-flutter pub add mobile_garuda
+flutter pub add app_guard
 ```
 
 ## Usage
@@ -73,12 +73,16 @@ Here’s an example of how to initialize and use the package in your app:
 
 Import the Security Analysis package
 ```bash
-import 'package:security_analysis/security_analysis.dart';
+import 'package:app_guard/app_guard.dart';
 ```
 
 Initialize the Security Analysis package
 ```bash
-final _mobileGarudaPlugin = MobileGaruda();
+final _appGuardPlugin = AppGuard(
+  applicationID: "com.security.app_guard",
+  initialClipboardProtection: true,
+  initialScreenshotProtection: false,
+);
 ```
 
 ## Compatibility
