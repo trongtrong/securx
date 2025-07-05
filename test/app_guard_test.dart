@@ -12,65 +12,42 @@ class MockAppGuardPlatform
   Future<String?> getPlatformVersion() => Future.value('42');
 
   @override
-  Future<void> disableScreenshot() {
-    // TODO: implement disableScreenshot
-    throw UnimplementedError();
+  Future<void> disableScreenshot() async {
+    // Simulate successful call
+    return;
   }
 
   @override
-  Future<void> enableScreenshot() {
-    // TODO: implement enableScreenshot
-    throw UnimplementedError();
+  Future<void> enableScreenshot() async {
+    // Simulate successful call
+    return;
   }
 
   @override
-  Future<bool?> isAppCloned(String applicationID) {
-    // TODO: implement isAppCloned
-    throw UnimplementedError();
-  }
+  Future<bool?> isDeviceRooted() async => false;
 
   @override
-  Future<bool?> isDebuggerAttached() {
-    // TODO: implement isDebuggerAttached
-    throw UnimplementedError();
-  }
+  Future<bool?> isDeviceSafe() async => true;
 
   @override
-  Future<bool?> isDebuggingModeEnable() {
-    // TODO: implement isDebuggingModeEnable
-    throw UnimplementedError();
-  }
+  Future<bool?> isDebuggingModeEnable() async => false;
 
   @override
-  Future<bool?> isDeveloperModeEnabled() {
-    // TODO: implement isDeveloperModeEnabled
-    throw UnimplementedError();
-  }
+  Future<bool?> isDeveloperModeEnabled() async => false;
 
   @override
-  Future<bool?> isDeviceRooted() {
-    // TODO: implement isDeviceRooted
-    throw UnimplementedError();
-  }
+  Future<bool?> isEmulator() async => false;
 
   @override
-  Future<bool?> isDeviceSafe() {
-    // TODO: implement isDeviceSafe
-    throw UnimplementedError();
-  }
+  Future<bool?> isVpnEnabled() async => true;
 
   @override
-  Future<bool?> isEmulator() {
-    // TODO: implement isEmulator
-    throw UnimplementedError();
-  }
+  Future<bool?> isDebuggerAttached() async => false;
 
   @override
-  Future<bool?> isVpnEnabled() {
-    // TODO: implement isVpnEnabled
-    throw UnimplementedError();
-  }
+  Future<bool?> isAppCloned({required String applicationID}) async => false;
 }
+
 
 void main() {
   final AppGuardPlatform initialPlatform = AppGuardPlatform.instance;
@@ -79,11 +56,62 @@ void main() {
     expect(initialPlatform, isInstanceOf<MethodChannelAppGuard>());
   });
 
-  test('getPlatformVersion', () async {
-    AppGuard appGuardPlugin = AppGuard();
-    MockAppGuardPlatform fakePlatform = MockAppGuardPlatform();
-    AppGuardPlatform.instance = fakePlatform;
+  setUp(() {
+    AppGuardPlatform.instance = MockAppGuardPlatform();
+  });
 
-    expect(await appGuardPlugin.getPlatformVersion(), '42');
+  test('getPlatformVersion', () async {
+    AppGuard appGuardPlugin = AppGuard(
+      applicationID: 'com.security.app_guard',
+    );
+    expect(await appGuardPlugin.getPlatformVersion, '42');
+  });
+
+  test('isDeviceRooted returns false', () async {
+    AppGuard appGuardPlugin = AppGuard(applicationID: 'com.security.app_guard');
+    expect(await appGuardPlugin.isDeviceRooted, false);
+  });
+
+  test('isDeviceSafe returns true', () async {
+    AppGuard appGuardPlugin = AppGuard(applicationID: 'com.security.app_guard');
+    expect(await appGuardPlugin.isDeviceSafe, true);
+  });
+
+  test('isDebuggingModeEnabled returns false', () async {
+    AppGuard appGuardPlugin = AppGuard(applicationID: 'com.security.app_guard');
+    expect(await appGuardPlugin.isDebuggingModeEnabled, false);
+  });
+
+  test('isDeveloperModeEnabled returns false', () async {
+    AppGuard appGuardPlugin = AppGuard(applicationID: 'com.security.app_guard');
+    expect(await appGuardPlugin.isDeveloperModeEnabled, false);
+  });
+
+  test('isEmulator returns false', () async {
+    AppGuard appGuardPlugin = AppGuard(applicationID: 'com.security.app_guard');
+    expect(await appGuardPlugin.isEmulator, false);
+  });
+
+  test('isVpnEnabled returns true', () async {
+    AppGuard appGuardPlugin = AppGuard(applicationID: 'com.security.app_guard');
+    expect(await appGuardPlugin.isVpnEnabled, true);
+  });
+
+  test('isDebuggerAttached returns false', () async {
+    AppGuard appGuardPlugin = AppGuard(applicationID: 'com.security.app_guard');
+    expect(await appGuardPlugin.isDebuggerAttached, false);
+  });
+
+  test('isAppCloned returns false', () async {
+    AppGuard appGuardPlugin = AppGuard(applicationID: 'com.security.app_guard');
+    expect(await appGuardPlugin.isAppCloned, false);
+  });
+
+  test('setScreenshotProtection does not throw', () async {
+    AppGuard appGuardPlugin = AppGuard(applicationID: 'com.security.app_guard');
+    await appGuardPlugin.setScreenshotProtection(enabled: true);
+    await appGuardPlugin.setScreenshotProtection(enabled: false);
+    expect(true, isTrue);
   });
 }
+

@@ -63,7 +63,7 @@ abstract class AppGuardPlatform extends PlatformInterface {
     throw UnimplementedError('isDebuggerAttached() has not been implemented.');
   }
 
-  Future<bool?> isAppCloned(String applicationID) {
+  Future<bool?> isAppCloned({required String applicationID}) {
     throw UnimplementedError('isAppCloned() has not been implemented.');
   }
 }

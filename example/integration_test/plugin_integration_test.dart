@@ -15,11 +15,58 @@ import 'package:app_guard/app_guard.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
+  final AppGuard plugin = AppGuard(applicationID: 'com.security.app_guard');
+
   testWidgets('getPlatformVersion test', (WidgetTester tester) async {
-    final AppGuard plugin = AppGuard();
-    final String? version = await plugin.getPlatformVersion();
-    // The version string depends on the host platform running the test, so
-    // just assert that some non-empty string is returned.
+    final String? version = await plugin.getPlatformVersion;
     expect(version?.isNotEmpty, true);
   });
+
+  testWidgets('isDeviceRooted returns bool', (WidgetTester tester) async {
+    final bool? rooted = await plugin.isDeviceRooted;
+    expect(rooted, isA<bool?>());
+  });
+
+  testWidgets('isDeviceSafe returns bool', (WidgetTester tester) async {
+    final bool? safe = await plugin.isDeviceSafe;
+    expect(safe, isA<bool?>());
+  });
+
+  testWidgets('isDebuggingModeEnabled returns bool', (WidgetTester tester) async {
+    final bool? debug = await plugin.isDebuggingModeEnabled;
+    expect(debug, isA<bool?>());
+  });
+
+  testWidgets('isDeveloperModeEnabled returns bool', (WidgetTester tester) async {
+    final bool? dev = await plugin.isDeveloperModeEnabled;
+    expect(dev, isA<bool?>());
+  });
+
+  testWidgets('isEmulator returns bool', (WidgetTester tester) async {
+    final bool? emulator = await plugin.isEmulator;
+    expect(emulator, isA<bool?>());
+  });
+
+  testWidgets('isVpnEnabled returns bool', (WidgetTester tester) async {
+    final bool? vpn = await plugin.isVpnEnabled;
+    expect(vpn, isA<bool?>());
+  });
+
+  testWidgets('isDebuggerAttached returns bool', (WidgetTester tester) async {
+    final bool? attached = await plugin.isDebuggerAttached;
+    expect(attached, isA<bool?>());
+  });
+
+  testWidgets('isAppCloned returns bool', (WidgetTester tester) async {
+    final bool? cloned = await plugin.isAppCloned;
+    expect(cloned, isA<bool?>());
+  });
+
+  testWidgets('setScreenshotProtection does not throw', (WidgetTester tester) async {
+    await plugin.setScreenshotProtection(enabled: true); // disables screenshots
+    await plugin.setScreenshotProtection(enabled: false); // enables screenshots
+    // No exception means pass
+    expect(true, isTrue);
+  });
 }
+

@@ -1,30 +1,78 @@
-// You have generated a new plugin project without specifying the `--platforms`
-// flag. A plugin project with no platform support was generated. To add a
-// platform, run `flutter create -t plugin --platforms <platforms> .` under the
-// same directory. You can also find a detailed instruction on how to add
-// platforms in the `pubspec.yaml` at
-// https://flutter.dev/to/pubspec-plugin-platforms.
+import 'package:flutter/foundation.dart';
 
 import 'app_guard_platform_interface.dart';
 
 class AppGuard {
-  /// Gets the current platform version.
+  /// The application ID (package name) of your app.
+  final String applicationID;
+
+  /// Manages the clipboard protection state for your UI to listen to.
+  ///
+  /// `true` means copy/paste should be disabled.
+  final ValueNotifier<bool> isClipboardProtected = ValueNotifier(false);
+
+  /// Initializes the AppGuard plugin.
+  ///
+  /// - [applicationID] is your app's package name and is **required**.
+  /// - [initialScreenshotProtection] determines if screenshot protection is active on startup. Defaults to `false`.
+  /// - [initialClipboardProtection] sets the initial state for clipboard protection. Defaults to `false`.
+  AppGuard({
+    required this.applicationID,
+    bool initialScreenshotProtection = false,
+    bool initialClipboardProtection = false,
+  }) {
+    // Set initial protection states from the constructor
+    setScreenshotProtection(enabled: initialScreenshotProtection);
+    setClipboardProtection(enabled: initialClipboardProtection);
+  }
+
+  /// Toggles screenshot and screen recording protection.
+  ///
+  /// Pass `true` to **enable** protection (disable screenshots).
+  /// Pass `false` to **disable** protection (allow screenshots).
+  /// This will clear [WindowManager.LayoutParams.FLAG_SECURE] flag on the
+  /// current activity, which will allow the device to take screenshot/ screenrecording or screen sharing.
+  ///
+  /// It uses [ScreenProtectorKit] to enable the screenshot on iOS
+  ///
+  /// Note that this is a best effort and may not work on all devices or platforms.
+  Future<void> setScreenshotProtection({required bool enabled}) {
+    if (enabled) {
+      return AppGuardPlatform.instance.disableScreenshot();
+    } else {
+      return AppGuardPlatform.instance.enableScreenshot();
+    }
+  }
+
+  /// Toggles the state for clipboard (copy/paste) protection.
+  ///
+  /// Pass `true` to **enable** protection (disable copy/paste).
+  /// Pass `false` to **disable** protection (allow copy/paste).
+  ///
+  /// This updates the [isClipboardProtected] notifier, which you can use in your UI.
+  void setClipboardProtection({required bool enabled}) {
+    isClipboardProtected.value = enabled;
+  }
+
+  /// Checks if the app is cloned (Android only).
+  ///
+  /// This uses the `applicationID` provided during initialization.
+  Future<bool?> get isAppCloned {
+    return AppGuardPlatform.instance.isAppCloned(applicationID: applicationID);
+  }
+
+   /// Gets the current platform version.
   ///
   /// Returns a string representing the platform version if successful, otherwise
   /// returns null.
-  Future<String?> getPlatformVersion() {
-    return AppGuardPlatform.instance.getPlatformVersion();
-  }
-
+  Future<String?> get getPlatformVersion => AppGuardPlatform.instance.getPlatformVersion();
+  
   /// Checks if the device is Rooted for Android
   /// Checks if the device is Jailbroken for iOS
   /// Returns a boolean indicating whether the device is rooted/jailbroken.
   /// If the platform does not support this operation, it returns null.
-  Future<bool?> isDeviceRooted() {
-    return AppGuardPlatform.instance.isDeviceRooted();
-  }
-
-  /// Checks if the device is safe for your app to run on.
+  Future<bool?>  get isDeviceRooted => AppGuardPlatform.instance.isDeviceRooted();
+    /// Checks if the device is safe for your app to run on.
   ///
   /// It checks for [isDeviceRooted/jailbroken]  devices,
   /// whether the app is running in [isDebuggingModeEnable],
@@ -34,82 +82,28 @@ class AppGuard {
   /// and whether the app is cloned.
   /// Returns a boolean after evaluatng all these scenarios to determine whether the device is safe for your app to run on.
   /// If the platform does not support this operation, it returns null.
-  Future<bool?> isDeviceSafe() {
-    return AppGuardPlatform.instance.isDeviceSafe();
-  }
-
+  Future<bool?> get isDeviceSafe => AppGuardPlatform.instance.isDeviceSafe();
+  
   /// Checks if the device is in debugging mode.
   ///
   /// Returns a boolean indicating whether debugging mode is enabled.
   /// If the platform does not support this operation, it returns null.
-  Future<bool?> isDebuggingModeEnable() {
-    return AppGuardPlatform.instance.isDebuggingModeEnable();
-  }
-
+  Future<bool?> get isDebuggingModeEnabled => AppGuardPlatform.instance.isDebuggingModeEnable();
+  
   /// Checks if the device developer mode (Only works on Android)
   ///
   /// Returns a boolean indicating whether developer mode is enabled.
   /// If the platform does not support this operation, it returns null.
-  Future<bool?> isDeveloperModeEnabled() {
-    return AppGuardPlatform.instance.isDeveloperModeEnabled();
-  }
-
+  Future<bool?> get isDeveloperModeEnabled => AppGuardPlatform.instance.isDeveloperModeEnabled();
   /// Checks if the device is an emulator.
   ///
   /// Returns a boolean indicating whether the device is an emulator.
   /// If the platform does not support this operation, it returns null.
-  Future<bool?> isEmulator() {
-    return AppGuardPlatform.instance.isEmulator();
-  }
-
+  Future<bool?> get isEmulator => AppGuardPlatform.instance.isEmulator();
   /// Checks if a VPN is enabled.
   ///
   /// Returns a boolean indicating whether a VPN is enabled.
   /// If the platform does not support this operation, it returns null.
-  Future<bool?> isVpnEnabled() {
-    return AppGuardPlatform.instance.isVpnEnabled();
-  }
-
-  /// Disables the ability to take a screenshot / screenrecording or screen sharing on the device.
-  ///
-  /// This will set the [WindowManager.LayoutParams.FLAG_SECURE] flag on the
-  /// current activity, which will prevent the device from taking a screenshot.
-  ///
-  /// It uses [ScreenProtectorKit] to disable the screenshot on iOS
-  ///
-  /// Note that this is a best effort and may not work on all devices or platforms.
-  Future<void> disableScreenshot() {
-    return AppGuardPlatform.instance.disableScreenshot();
-  }
-
-  /// Allows to takes screenshots / screenrecording or screen sharing
-  ///
-  /// This will clear [WindowManager.LayoutParams.FLAG_SECURE] flag on the
-  /// current activity, which will allow the device to take screenshot/ screenrecording or screen sharing.
-  ///
-  /// It uses [ScreenProtectorKit] to enable the screenshot on iOS
-  ///
-  /// Note that this is a best effort and may not work on all devices or platforms.
-  Future<void> enableScreenshot() {
-    return AppGuardPlatform.instance.enableScreenshot();
-  }
-
-  /// Checks if the device has a debugger attached.
-  ///
-  /// Returns a boolean indicating whether the device has a debugger attached.
-  /// If the platform does not support this operation, it returns null.
-  Future<bool?> isDebuggerAttached() {
-    return AppGuardPlatform.instance.isDebuggerAttached();
-  }
-
-  /// Checks if the app is cloned. (Only works on Android)
-  ///
-  /// This function evaluates whether the application is running as a cloned app
-  /// by using the provided application ID.
-  ///
-  /// Returns a boolean indicating whether the app is cloned. If the platform does
-  /// not support this operation, it returns null.
-  Future<bool?> isAppCloned({required String applicationID}) {
-    return AppGuardPlatform.instance.isAppCloned(applicationID);
-  }
+  Future<bool?> get isVpnEnabled => AppGuardPlatform.instance.isVpnEnabled();
+  Future<bool?> get isDebuggerAttached => AppGuardPlatform.instance.isDebuggerAttached();
 }
