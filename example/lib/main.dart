@@ -15,13 +15,59 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool 
       _isScreenshotDisabled = false,
-      _copyPasteEnable = false;
+      _copyPasteEnable = true;
+
+  // State variables for async values
+  String? _platformVersion;
+  bool? _isDeviceSafe;
+  bool? _isDeviceRooted;
+  bool? _isDebuggingModeEnabled;
+  bool? _isDeveloperModeEnabled;
+  bool? _isEmulator;
+  bool? _isVpnEnabled;
+  bool? _isDebuggerAttached;
+  bool? _isAppCloned;
 
   final _appGuardPlugin = AppGuard(
     applicationID: "com.security.app_guard",
     initialClipboardProtection: true,
-    initialScreenshotProtection: true,
+    initialScreenshotProtection: false
   );
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchDeviceSecurityInfo();
+    _appGuardPlugin.isClipboardProtected.addListener(() {
+      setState(() {
+        _copyPasteEnable = !_appGuardPlugin.isClipboardProtected.value;
+      });
+    });
+  }
+
+  Future<void> _fetchDeviceSecurityInfo() async {
+    final platformVersion = await _appGuardPlugin.getPlatformVersion;
+    final isDeviceSafe = await _appGuardPlugin.isDeviceSafe;
+    final isDeviceRooted = await _appGuardPlugin.isDeviceRooted;
+    final isDebuggingModeEnabled = await _appGuardPlugin.isDebuggingModeEnabled;
+    final isDeveloperModeEnabled = await _appGuardPlugin.isDeveloperModeEnabled;
+    final isEmulator = await _appGuardPlugin.isEmulator;
+    final isVpnEnabled = await _appGuardPlugin.isVpnEnabled;
+    final isDebuggerAttached = await _appGuardPlugin.isDebuggerAttached;
+    final isAppCloned = await _appGuardPlugin.isAppCloned;
+
+    setState(() {
+      _platformVersion = platformVersion;
+      _isDeviceSafe = isDeviceSafe;
+      _isDeviceRooted = isDeviceRooted;
+      _isDebuggingModeEnabled = isDebuggingModeEnabled;
+      _isDeveloperModeEnabled = isDeveloperModeEnabled;
+      _isEmulator = isEmulator;
+      _isVpnEnabled = isVpnEnabled;
+      _isDebuggerAttached = isDebuggerAttached;
+      _isAppCloned = isAppCloned;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,26 +82,29 @@ class _MyAppState extends State<MyApp> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Running on: ${_appGuardPlugin.getPlatformVersion }\n'),
-                Text('Is Device Safe: ${_appGuardPlugin.isDeviceSafe}\n'),
+                Text('Running on: ${_platformVersion ?? "loading..."}'),
+                Text('Is Device Safe: ${_isDeviceSafe ?? "loading..."}'),
                 const Divider(),
                 const Text('Checklist', textAlign: TextAlign.center),
                 const Divider(),
-                Text('Is Device Rooted: ${_appGuardPlugin.isDeviceRooted}'),
-                Text('Is Debugging Mode Enable: ${_appGuardPlugin.isDebuggingModeEnabled}'),
-                Text('Is Developer Mode Enabled: ${_appGuardPlugin.isDeveloperModeEnabled}'),
-                Text('Is Emulator: ${_appGuardPlugin.isEmulator}'),
-                Text('Is VPN Enabled: ${_appGuardPlugin.isVpnEnabled}'),
+                Text('Is Device Rooted: ${_isDeviceRooted ?? "loading..."}'),
+                Text('Is Debugging Mode Enable: ${_isDebuggingModeEnabled ?? "loading..."}'),
+                Text('Is Developer Mode Enabled: ${_isDeveloperModeEnabled ?? "loading..."}'),
+                Text('Is Emulator: ${_isEmulator ?? "loading..."}'),
+                Text('Is VPN Enabled: ${_isVpnEnabled ?? "loading..."}'),
                 Text('Is Screenshot Disabled: $_isScreenshotDisabled'),
-                Text('Is Debugger Attached: ${_appGuardPlugin.isDebuggerAttached}'),
-                Text('Is App Cloned: ${_appGuardPlugin.isAppCloned}'),
-                Text('Is Copy paste Enabled: ${_appGuardPlugin.isClipboardProtected}'),
+                Text('Is Debugger Attached: ${_isDebuggerAttached ?? "loading..."}'),
+                Text('Is App Cloned: ${_isAppCloned ?? "loading..."}'),
+                ValueListenableBuilder<bool>(
+                  valueListenable: _appGuardPlugin.isClipboardProtected,
+                  builder: (context, value, _) => Text('Is Copy paste Enabled: ${!value}'),
+                ),
                 const Divider(),
                 ListTile(
-                  title: const Text("Copy Paste"),
-                  subtitle: _copyPasteEnable ? const Text("Enabled") : const Text("Disabled"),
+                  title: const Text("Clipboard Protection"),
+                  subtitle: !_copyPasteEnable ? const Text("Enabled") : const Text("Disabled"),
                   trailing: Switch.adaptive(
-                    value: _copyPasteEnable,
+                    value: !_copyPasteEnable,
                     onChanged: (value) {
                       _copyPasteEnable = !_copyPasteEnable;
                       setState(() {});
@@ -81,25 +130,6 @@ class _MyAppState extends State<MyApp> {
                         : null,
                   ),
                 ),
-                SizedBox(
-                  height: 80,
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      label: Text("TextFormField"),
-                      border: OutlineInputBorder(),
-                    ),
-                    enableInteractiveSelection: _copyPasteEnable,
-                    contextMenuBuilder: _copyPasteEnable
-                        ? (context, editableTextState) {
-                            final buttonItems = editableTextState.contextMenuButtonItems;
-                            return AdaptiveTextSelectionToolbar.buttonItems(
-                              anchors: editableTextState.contextMenuAnchors,
-                              buttonItems: buttonItems,
-                            );
-                          }
-                        : null,
-                  ),
-                ),
                 ListTile(
                   title: const Text("Screen Capturing and Screensharing"),
                   subtitle: !_isScreenshotDisabled
@@ -108,11 +138,7 @@ class _MyAppState extends State<MyApp> {
                   trailing: Switch.adaptive(
                     value: !_isScreenshotDisabled,
                     onChanged: (value) {
-                      if (_isScreenshotDisabled) {
-                        _appGuardPlugin.setScreenshotProtection(enabled: false);
-                      } else {
-                        _appGuardPlugin.setScreenshotProtection(enabled: true);
-                      }
+                      _appGuardPlugin.setScreenshotProtection(enabled: _isScreenshotDisabled);
                       _isScreenshotDisabled = !_isScreenshotDisabled;
                       setState(() {});
                     },
