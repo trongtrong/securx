@@ -3,6 +3,7 @@ description: "A robust mobile security package designed to enhance application r
 version: 0.0.1
 homepage: https://github.com/Rgada28/app_guard
 issue_tracker: https://github.com/Rgada28/app_guard/issues
+license: BSD-3-Clause
 
 environment:
   sdk: ^3.8.1

@@ -1,5 +1,9 @@
 # Mobile Garuda - A Security Analysis Package
 
+[![pub package](https://img.shields.io/pub/v/app_guard.svg)](https://pub.dev/packages/app_guard)
+[![pub points](https://badges.bar/app_guard/pub%20points)](https://pub.dev/packages/app_guard/score)
+[![likes](https://badges.bar/app_guard/likes)](https://pub.dev/packages/app_guard/score)
+
 A robust mobile security package designed to enhance application resilience against various threats. This package includes features for device integrity checks, secure communication, mobile privacy, and fraud prevention.
 
 ## Features
