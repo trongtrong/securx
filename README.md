@@ -85,6 +85,9 @@ final _appGuardPlugin = FlutterAppGuard(
   initialClipboardProtection: true,
   initialScreenshotProtection: false,
 );
+
+// To control screenshot protection after initialization
+_appGuardPlugin.setScreenshotProtection(enabled: true); // true = restricted
 ```
 
 ## Compatibility
