@@ -1,8 +1,10 @@
+
 # Flutter App Guard - A Security Analysis Package
 
 [![pub package](https://img.shields.io/pub/v/flutter_app_guard.svg)](https://pub.dev/packages/flutter_app_guard)
 [![pub points](https://badges.bar/flutter_app_guard/pub%20points)](https://pub.dev/packages/flutter_app_guard/score)
 [![likes](https://badges.bar/flutter_app_guard/likes)](https://pub.dev/packages/flutter_app_guard/score)
+
 
 A robust mobile security package designed to enhance application resilience against various threats. This package includes features for device integrity checks, secure communication, mobile privacy, and fraud prevention.
 
