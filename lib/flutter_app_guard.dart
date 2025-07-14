@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import 'app_guard_platform_interface.dart';
 
-class AppGuard {
+class FlutterAppGuard {
   /// The application ID (package name) of your app.
   final String applicationID;
 
@@ -16,7 +16,7 @@ class AppGuard {
   /// - [applicationID] is your app's package name and is **required**.
   /// - [initialScreenshotProtection] determines if screenshot protection is active on startup. Defaults to `false`.
   /// - [initialClipboardProtection] sets the initial state for clipboard protection. Defaults to `false`.
-  AppGuard({
+  FlutterAppGuard({
     required this.applicationID,
     bool initialScreenshotProtection = false,
     bool initialClipboardProtection = false,
@@ -61,18 +61,19 @@ class AppGuard {
     return AppGuardPlatform.instance.isAppCloned(applicationID: applicationID);
   }
 
-   /// Gets the current platform version.
+  /// Gets the current platform version.
   ///
   /// Returns a string representing the platform version if successful, otherwise
   /// returns null.
   Future<String?> get getPlatformVersion => AppGuardPlatform.instance.getPlatformVersion();
-  
+
   /// Checks if the device is Rooted for Android
   /// Checks if the device is Jailbroken for iOS
   /// Returns a boolean indicating whether the device is rooted/jailbroken.
   /// If the platform does not support this operation, it returns null.
-  Future<bool?>  get isDeviceRooted => AppGuardPlatform.instance.isDeviceRooted();
-    /// Checks if the device is safe for your app to run on.
+  Future<bool?> get isDeviceRooted => AppGuardPlatform.instance.isDeviceRooted();
+
+  /// Checks if the device is safe for your app to run on.
   ///
   /// It checks for [isDeviceRooted/jailbroken]  devices,
   /// whether the app is running in [isDebuggingModeEnable],
@@ -83,23 +84,25 @@ class AppGuard {
   /// Returns a boolean after evaluatng all these scenarios to determine whether the device is safe for your app to run on.
   /// If the platform does not support this operation, it returns null.
   Future<bool?> get isDeviceSafe => AppGuardPlatform.instance.isDeviceSafe();
-  
+
   /// Checks if the device is in debugging mode.
   ///
   /// Returns a boolean indicating whether debugging mode is enabled.
   /// If the platform does not support this operation, it returns null.
   Future<bool?> get isDebuggingModeEnabled => AppGuardPlatform.instance.isDebuggingModeEnable();
-  
+
   /// Checks if the device developer mode (Only works on Android)
   ///
   /// Returns a boolean indicating whether developer mode is enabled.
   /// If the platform does not support this operation, it returns null.
   Future<bool?> get isDeveloperModeEnabled => AppGuardPlatform.instance.isDeveloperModeEnabled();
+
   /// Checks if the device is an emulator.
   ///
   /// Returns a boolean indicating whether the device is an emulator.
   /// If the platform does not support this operation, it returns null.
   Future<bool?> get isEmulator => AppGuardPlatform.instance.isEmulator();
+
   /// Checks if a VPN is enabled.
   ///
   /// Returns a boolean indicating whether a VPN is enabled.

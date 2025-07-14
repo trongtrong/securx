@@ -1,10 +1,10 @@
-package com.security.app_guard.app_guard
+package com.security.flutter_app_guard.flutter_app_guard
 
 import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.provider.Settings
-
+import android.util.Log
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -13,9 +13,9 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 
-/** AppGuardPlugin */
+/** FlutterAppGuardPlugin */
 // Implement ActivityAware to get access to the Activity
-class AppGuardPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
+class FlutterAppGuardPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
     /// The MethodChannel that will the communication between Flutter and native Android
     ///
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
@@ -28,7 +28,7 @@ class AppGuardPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
     // Provides the application context.
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         applicationContext = flutterPluginBinding.applicationContext
-        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "app_guard")
+        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "flutter_app_guard")
         channel.setMethodCallHandler(this)
     }
 
@@ -61,21 +61,23 @@ class AppGuardPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
                 result.success(EmulatorCheck().isEmulator())
             }
             "enableScreenshot" -> {
-                // Screenshot protection requires an Activity
-                if (activity != null) {
-                    result.success(ScreenshotProtection(activity).turnScreenshotOn())
-                } else {
-                    result.error("UNAVAILABLE", "Activity not available for screenshot protection.", null)
-                }
-            }
-            "disableScreenshot" -> {
-                // Screenshot protection requires an Activity
-                if (activity != null) {
-                    result.success(ScreenshotProtection(activity).turnScreenshotOff())
-                } else {
-                    result.error("UNAVAILABLE", "Activity not available for screenshot protection.", null)
-                }
-            }
+    if (activity != null) {
+        Log.d("FlutterAppGuard", "Enabling screenshot (clearing FLAG_SECURE)")
+        result.success(ScreenshotProtection(activity).turnScreenshotOn())
+    } else {
+        Log.e("FlutterAppGuard", "Activity is null when enabling screenshot")
+        result.error("UNAVAILABLE", "Activity not available for screenshot protection.", null)
+    }
+}
+"disableScreenshot" -> {
+    if (activity != null) {
+        Log.d("FlutterAppGuard", "Disabling screenshot (setting FLAG_SECURE)")
+        result.success(ScreenshotProtection(activity).turnScreenshotOff())
+    } else {
+        Log.e("FlutterAppGuard", "Activity is null when disabling screenshot")
+        result.error("UNAVAILABLE", "Activity not available for screenshot protection.", null)
+    }
+}
             "isDebuggerAttached" -> {
                 result.success(DebuggerProtection().isDebuggerAttached())
             }

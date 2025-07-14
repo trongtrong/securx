@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:app_guard/app_guard_constant.dart';
+import 'package:flutter_app_guard/app_guard_constant.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -11,7 +11,7 @@ import 'app_guard_platform_interface.dart';
 class MethodChannelAppGuard extends AppGuardPlatform {
   /// The method channel used to interact with the native platform.
   @visibleForTesting
-  final methodChannel = const MethodChannel('app_guard');
+  final methodChannel = const MethodChannel('flutter_app_guard');
 
   @override
   Future<String?> getPlatformVersion() async {

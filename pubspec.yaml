@@ -1,11 +1,11 @@
-name: app_guard
+name: flutter_app_guard
 description: "A robust mobile security package designed to enhance application resilience against various threats. This package includes features for device integrity checks, secure communication, mobile privacy, and fraud prevention."
 version: 0.0.1
 homepage: https://github.com/Rgada28/app_guard
 issue_tracker: https://github.com/Rgada28/app_guard/issues
 
 environment:
-  sdk: ^3.8.1
+  sdk: '>=3.0.0 <4.0.0'
   flutter: '>=3.3.0'
 
 dependencies:
@@ -36,10 +36,10 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.security.app_guard.app_guard
-        pluginClass: AppGuardPlugin
+        package: com.security.flutter_app_guard.flutter_app_guard
+        pluginClass: FlutterAppGuardPlugin
       ios:
-        pluginClass: AppGuardPlugin
+        pluginClass: FlutterAppGuardPlugin 
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

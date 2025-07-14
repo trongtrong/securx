@@ -1,4 +1,8 @@
-# App Guard - A Security Analysis Package
+# Flutter App Guard - A Security Analysis Package
+
+[![pub package](https://img.shields.io/pub/v/flutter_app_guard.svg)](https://pub.dev/packages/flutter_app_guard)
+[![pub points](https://badges.bar/flutter_app_guard/pub%20points)](https://pub.dev/packages/flutter_app_guard/score)
+[![likes](https://badges.bar/flutter_app_guard/likes)](https://pub.dev/packages/flutter_app_guard/score)
 
 A robust mobile security package designed to enhance application resilience against various threats. This package includes features for device integrity checks, secure communication, mobile privacy, and fraud prevention.
 
@@ -58,7 +62,7 @@ A robust mobile security package designed to enhance application resilience agai
 To integrate this package into your project:
 
 ```bash
-flutter pub add app_guard
+flutter pub add flutter_app_guard
 ```
 
 ## Usage
@@ -69,13 +73,13 @@ Here’s an example of how to initialize and use the package in your app:
 
 Import the Security Analysis package
 ```bash
-import 'package:app_guard/app_guard.dart';
+import 'package:flutter_app_guard/flutter_app_guard.dart';
 ```
 
 Initialize the Security Analysis package
 ```bash
-final _appGuardPlugin = AppGuard(
-  applicationID: "com.example.package_name",
+final _appGuardPlugin = FlutterAppGuard(
+  applicationID: "com.security.flutter_app_guard",
   initialClipboardProtection: true,
   initialScreenshotProtection: false,
 );

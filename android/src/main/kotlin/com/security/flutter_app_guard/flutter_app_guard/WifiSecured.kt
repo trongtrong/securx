@@ -1,4 +1,4 @@
-package com.security.app_guard.app_guard
+package com.security.flutter_app_guard.flutter_app_guard
 
 import android.net.wifi.WifiManager
 import android.content.Context

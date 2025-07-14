@@ -7,15 +7,15 @@
 // https://flutter.dev/to/integration-testing
 
 
+import 'package:flutter_app_guard/flutter_app_guard.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
-import 'package:app_guard/app_guard.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  final AppGuard plugin = AppGuard(applicationID: 'com.security.app_guard');
+  final FlutterAppGuard plugin = FlutterAppGuard(applicationID: 'com.security.flutter_app_guard');
 
   testWidgets('getPlatformVersion test', (WidgetTester tester) async {
     final String? version = await plugin.getPlatformVersion;

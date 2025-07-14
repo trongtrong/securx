@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:app_guard/app_guard.dart';
-import 'package:app_guard/app_guard_platform_interface.dart';
-import 'package:app_guard/app_guard_method_channel.dart';
+import 'package:flutter_app_guard/flutter_app_guard.dart';
+import 'package:flutter_app_guard/app_guard_platform_interface.dart';
+import 'package:flutter_app_guard/app_guard_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 class MockAppGuardPlatform
@@ -61,54 +61,54 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    AppGuard appGuardPlugin = AppGuard(
-      applicationID: 'com.security.app_guard',
+    FlutterAppGuard appGuardPlugin = FlutterAppGuard(
+      applicationID: 'com.security.flutter_app_guard',
     );
     expect(await appGuardPlugin.getPlatformVersion, '42');
   });
 
   test('isDeviceRooted returns false', () async {
-    AppGuard appGuardPlugin = AppGuard(applicationID: 'com.security.app_guard');
+    FlutterAppGuard appGuardPlugin = FlutterAppGuard(applicationID: 'com.security.flutter_app_guard');
     expect(await appGuardPlugin.isDeviceRooted, false);
   });
 
   test('isDeviceSafe returns true', () async {
-    AppGuard appGuardPlugin = AppGuard(applicationID: 'com.security.app_guard');
+    FlutterAppGuard appGuardPlugin = FlutterAppGuard(applicationID: 'com.security.flutter_app_guard');
     expect(await appGuardPlugin.isDeviceSafe, true);
   });
 
   test('isDebuggingModeEnabled returns false', () async {
-    AppGuard appGuardPlugin = AppGuard(applicationID: 'com.security.app_guard');
+    FlutterAppGuard appGuardPlugin = FlutterAppGuard(applicationID: 'com.security.flutter_app_guard');
     expect(await appGuardPlugin.isDebuggingModeEnabled, false);
   });
 
   test('isDeveloperModeEnabled returns false', () async {
-    AppGuard appGuardPlugin = AppGuard(applicationID: 'com.security.app_guard');
+    FlutterAppGuard appGuardPlugin = FlutterAppGuard(applicationID: 'com.security.flutter_app_guard');
     expect(await appGuardPlugin.isDeveloperModeEnabled, false);
   });
 
   test('isEmulator returns false', () async {
-    AppGuard appGuardPlugin = AppGuard(applicationID: 'com.security.app_guard');
+    FlutterAppGuard appGuardPlugin = FlutterAppGuard(applicationID: 'com.security.flutter_app_guard');
     expect(await appGuardPlugin.isEmulator, false);
   });
 
   test('isVpnEnabled returns true', () async {
-    AppGuard appGuardPlugin = AppGuard(applicationID: 'com.security.app_guard');
+    FlutterAppGuard appGuardPlugin = FlutterAppGuard(applicationID: 'com.security.flutter_app_guard');
     expect(await appGuardPlugin.isVpnEnabled, true);
   });
 
   test('isDebuggerAttached returns false', () async {
-    AppGuard appGuardPlugin = AppGuard(applicationID: 'com.security.app_guard');
+    FlutterAppGuard appGuardPlugin = FlutterAppGuard(applicationID: 'com.security.flutter_app_guard');
     expect(await appGuardPlugin.isDebuggerAttached, false);
   });
 
   test('isAppCloned returns false', () async {
-    AppGuard appGuardPlugin = AppGuard(applicationID: 'com.security.app_guard');
+    FlutterAppGuard appGuardPlugin = FlutterAppGuard(applicationID: 'com.security.flutter_app_guard');
     expect(await appGuardPlugin.isAppCloned, false);
   });
 
   test('setScreenshotProtection does not throw', () async {
-    AppGuard appGuardPlugin = AppGuard(applicationID: 'com.security.app_guard');
+    FlutterAppGuard appGuardPlugin = FlutterAppGuard(applicationID: 'com.security.flutter_app_guard');
     await appGuardPlugin.setScreenshotProtection(enabled: true);
     await appGuardPlugin.setScreenshotProtection(enabled: false);
     expect(true, isTrue);
