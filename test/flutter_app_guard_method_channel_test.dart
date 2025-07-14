@@ -1,12 +1,13 @@
 import 'package:flutter/services.dart';
+import 'package:flutter_app_guard/app_guard_method_channel.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:app_guard/app_guard_method_channel.dart';
+
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   MethodChannelAppGuard platform = MethodChannelAppGuard();
-  const MethodChannel channel = MethodChannel('app_guard');
+  const MethodChannel channel = MethodChannel('flutter_app_guard');
 
   setUp(() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(

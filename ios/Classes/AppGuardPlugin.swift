@@ -5,7 +5,7 @@ import ScreenProtectorKit
 
 public class AppGuardPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "app_guard", binaryMessenger: registrar.messenger())
+    let channel = FlutterMethodChannel(name: "flutter_app_guard", binaryMessenger: registrar.messenger())
     let instance = AppGuardPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }

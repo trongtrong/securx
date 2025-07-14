@@ -1,6 +1,6 @@
 # Contributing to AppGuard
 
-We welcome contributions to the `app_guard` plugin! Whether it's reporting a bug, suggesting a new feature, or submitting a pull request, your help is greatly appreciated.
+We welcome contributions to the `flutter_app_guard` plugin! Whether it's reporting a bug, suggesting a new feature, or submitting a pull request, your help is greatly appreciated.
 
 Please take a moment to review this document to ensure a smooth contribution process.
 

@@ -2,7 +2,7 @@
 
 ## 0.0.1 - 2025-07-04
 
-- Initial release of the `app_guard` plugin.
+- Initial release of the `flutter_app_guard` plugin.
 - Added methods for:
   - `getPlatformVersion`
   - `isDeviceSafe`

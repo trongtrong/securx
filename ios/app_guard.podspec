@@ -1,9 +1,9 @@
 #
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html.
-# Run `pod lib lint app_guard.podspec` to validate before publishing.
+# Run `pod lib lint flutter_app_guard.podspec` to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'app_guard'
+  s.name             = 'flutter_app_guard'
   s.version          = '0.0.1'
   
   s.summary          = 'A robust mobile security package for Flutter apps, enhancing resilience against threats like rooting, debugging, and app cloning.'
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   - And other measures to enhance application resilience and prevent fraud.
   This plugin is designed to help developers build more secure Flutter applications by integrating native platform security capabilities.
                        DESC
-  s.homepage         = 'https://github.com/Rgada28/app_guard/tree/develop' 
+  s.homepage         = 'https://github.com/Rgada28/flutter_app_guard/tree/develop' 
   # --- UPDATED: License type changed to BSD-3-Clause ---
   s.license          = { :type => 'BSD-3-Clause', :file => '../LICENSE' }
   s.author           = { 'Raj Gada' => '' }

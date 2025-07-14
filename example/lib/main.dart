@@ -1,5 +1,5 @@
-import 'package:app_guard/app_guard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_guard/flutter_app_guard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,9 +13,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool 
-      _isScreenshotDisabled = false,
-      _copyPasteEnable = true;
+  bool _copyPasteEnable = true, _isScreenshotEnabled = false;
 
   // State variables for async values
   String? _platformVersion;
@@ -28,21 +26,28 @@ class _MyAppState extends State<MyApp> {
   bool? _isDebuggerAttached;
   bool? _isAppCloned;
 
-  final _appGuardPlugin = AppGuard(
-    applicationID: "com.security.app_guard",
+  final _appGuardPlugin = FlutterAppGuard(
+    applicationID: "com.security.flutter_app_guard.flutter_app_guard",
     initialClipboardProtection: true,
-    initialScreenshotProtection: false
   );
 
   @override
   void initState() {
     super.initState();
     _fetchDeviceSecurityInfo();
+
+    // Set initial copy/paste state from plugin
+    _copyPasteEnable = !_appGuardPlugin.isClipboardProtected.value;
+
     _appGuardPlugin.isClipboardProtected.addListener(() {
       setState(() {
         _copyPasteEnable = !_appGuardPlugin.isClipboardProtected.value;
       });
     });
+
+    // Ensure screenshot protection is set after activity is ready and update UI state
+    // Initially, screenshot protection is enabled (restricted).
+    _appGuardPlugin.setScreenshotProtection(enabled: true);
   }
 
   Future<void> _fetchDeviceSecurityInfo() async {
@@ -92,7 +97,7 @@ class _MyAppState extends State<MyApp> {
                 Text('Is Developer Mode Enabled: ${_isDeveloperModeEnabled ?? "loading..."}'),
                 Text('Is Emulator: ${_isEmulator ?? "loading..."}'),
                 Text('Is VPN Enabled: ${_isVpnEnabled ?? "loading..."}'),
-                Text('Is Screenshot Disabled: $_isScreenshotDisabled'),
+                Text('Is Screenshot Enabled: $_isScreenshotEnabled'),
                 Text('Is Debugger Attached: ${_isDebuggerAttached ?? "loading..."}'),
                 Text('Is App Cloned: ${_isAppCloned ?? "loading..."}'),
                 ValueListenableBuilder<bool>(
@@ -132,15 +137,15 @@ class _MyAppState extends State<MyApp> {
                 ),
                 ListTile(
                   title: const Text("Screen Capturing and Screensharing"),
-                  subtitle: _isScreenshotDisabled
-                      ? const Text("Allowed")
-                      : const Text("Restricted"),
+                  subtitle: _isScreenshotEnabled ? const Text("Allowed") : const Text("Restricted"),
                   trailing: Switch.adaptive(
-                    value: _isScreenshotDisabled,
+                    value: _isScreenshotEnabled,
                     onChanged: (value) {
-                      _appGuardPlugin.setScreenshotProtection(enabled: _isScreenshotDisabled);
-                      _isScreenshotDisabled = !_isScreenshotDisabled;
-                      setState(() {});
+                      setState(() {
+                        _isScreenshotEnabled = value;
+                        // When enabled is true, screenshots are restricted.
+                        _appGuardPlugin.setScreenshotProtection(enabled: !_isScreenshotEnabled);
+                      });
                     },
                   ),
                 ),

@@ -3,7 +3,7 @@ import UIKit
 import XCTest
 
 
-@testable import app_guard
+@testable import flutter_app_guard
 
 // This demonstrates a simple unit test of the Swift portion of this plugin's implementation.
 //
