@@ -1,4 +1,4 @@
-package com.security.flutter_app_guard.flutter_app_guard
+package com.security.securx.securx
 
 import android.content.Context
 import android.os.Build

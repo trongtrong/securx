@@ -3,10 +3,10 @@ import UIKit
 import DTTJailbreakDetection
 import ScreenProtectorKit
 
-public class AppGuardPlugin: NSObject, FlutterPlugin {
+public class SecurxPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "flutter_app_guard", binaryMessenger: registrar.messenger())
-    let instance = AppGuardPlugin()
+    let channel = FlutterMethodChannel(name: "securx", binaryMessenger: registrar.messenger())
+    let instance = SecurxPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 

@@ -1,9 +1,9 @@
 
-# Flutter App Guard - A Security Analysis Package
+# Securx - A Security Analysis Package
 
-[![pub package](https://img.shields.io/pub/v/flutter_app_guard.svg)](https://pub.dev/packages/flutter_app_guard)
-[![pub points](https://badges.bar/flutter_app_guard/pub%20points)](https://pub.dev/packages/flutter_app_guard/score)
-[![likes](https://badges.bar/flutter_app_guard/likes)](https://pub.dev/packages/flutter_app_guard/score)
+[![pub package](https://img.shields.io/pub/v/securx.svg)](https://pub.dev/packages/securx)
+[![pub points](https://badges.bar/securx/pub%20points)](https://pub.dev/packages/securx/score)
+[![likes](https://badges.bar/securx/likes)](https://pub.dev/packages/securx/score)
 
 
 A robust mobile security package designed to enhance application resilience against various threats. This package includes features for device integrity checks, secure communication, mobile privacy, and fraud prevention.
@@ -46,7 +46,7 @@ A robust mobile security package designed to enhance application resilience agai
     - **Severity**: Medium
     - **Benefits**: Secures sensitive visual data.
 
-- **Copy-Paste Prevention**: Prevents sensitive data from being copied to the clipboard.
+- **Copy-Paste Prevention**: (coming soon) Prevents sensitive data from being copied to the clipboard.
     - **Severity**: Medium
     - **Benefits**: Ensures confidentiality of sensitive information.
 
@@ -64,7 +64,7 @@ A robust mobile security package designed to enhance application resilience agai
 To integrate this package into your project:
 
 ```bash
-flutter pub add flutter_app_guard
+flutter pub add securx
 ```
 
 ## Usage
@@ -75,14 +75,13 @@ Here’s an example of how to initialize and use the package in your app:
 
 Import the Security Analysis package
 ```bash
-import 'package:flutter_app_guard/flutter_app_guard.dart';
+import 'package:securx/securx.dart';
 ```
 
 Initialize the Security Analysis package
 ```bash
-final _appGuardPlugin = FlutterAppGuard(
-  applicationID: "com.security.flutter_app_guard",
-  initialClipboardProtection: true,
+final _secuxPlugin = Securx(
+  applicationID: "com.security.securx",
   initialScreenshotProtection: false,
 );
 
@@ -103,7 +102,7 @@ _appGuardPlugin.setScreenshotProtection(enabled: true); // true = restricted
 | VPN Detection                       |   ✅    |   ✅  | 
 | Screen Capturing Prevention         |   ✅    |   ✅  | 
 | Screen Share Prevention             |   ✅    |   ✅  | 
-| Copy-Paste Prevention               |   ✅    |   ✅  | 
 | App Cloning/Second Space Detection  |   ✅    |   ❌  | 
+<!-- | Copy-Paste Prevention               |   ✅    |   ✅  |  -->
 
 
