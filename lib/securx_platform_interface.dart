@@ -1,24 +1,24 @@
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import 'app_guard_method_channel.dart';
+import 'securx_method_channel.dart';
 
-abstract class AppGuardPlatform extends PlatformInterface {
-  /// Constructs a AppGuardPlatform.
-  AppGuardPlatform() : super(token: _token);
+abstract class SecurxPlatform extends PlatformInterface {
+  /// Constructs a SecurxPlatform.
+  SecurxPlatform() : super(token: _token);
 
   static final Object _token = Object();
 
-  static AppGuardPlatform _instance = MethodChannelAppGuard();
+  static SecurxPlatform _instance = MethodChannelSecurx();
 
-  /// The default instance of [AppGuardPlatform] to use.
+  /// The default instance of [SecurxPlatform] to use.
   ///
-  /// Defaults to [MethodChannelAppGuardPlatform].
-  static AppGuardPlatform get instance => _instance;
+  /// Defaults to [MethodChannelSecurx].
+  static SecurxPlatform get instance => _instance;
 
   /// Platform-specific implementations should set this with their own
-  /// platform-specific class that extends [AppGuardPlatformPlatform] when
+  /// platform-specific class that extends [SecurxPlatform] when
   /// they register themselves.
-  static set instance(AppGuardPlatform instance) {
+  static set instance(SecurxPlatform instance) {
     PlatformInterface.verifyToken(instance, _token);
     _instance = instance;
   }

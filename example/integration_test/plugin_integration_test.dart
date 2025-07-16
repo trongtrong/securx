@@ -6,16 +6,14 @@
 // For more information about Flutter integration tests, please see
 // https://flutter.dev/to/integration-testing
 
-
-import 'package:flutter_app_guard/flutter_app_guard.dart';
+import 'package:securx/securx.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  final FlutterAppGuard plugin = FlutterAppGuard(applicationID: 'com.security.flutter_app_guard');
+  final Securx plugin = Securx(applicationID: 'com.security.securx');
 
   testWidgets('getPlatformVersion test', (WidgetTester tester) async {
     final String? version = await plugin.getPlatformVersion;
@@ -69,4 +67,3 @@ void main() {
     expect(true, isTrue);
   });
 }
-

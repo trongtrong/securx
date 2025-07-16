@@ -3,7 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:securx/securx_constant.dart';
+import 'securx_constant.dart';
+
 import 'securx_platform_interface.dart';
 
 /// An implementation of [SecurxPlatform] that uses method channels.

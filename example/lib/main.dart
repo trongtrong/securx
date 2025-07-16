@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_guard/flutter_app_guard.dart';
+import 'package:securx/securx.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,8 +26,8 @@ class _MyAppState extends State<MyApp> {
   bool? _isDebuggerAttached;
   bool? _isAppCloned;
 
-  final _appGuardPlugin = FlutterAppGuard(
-    applicationID: "com.security.flutter_app_guard.flutter_app_guard",
+  final _secuxPlugin = Securx(
+    applicationID: "com.security.securx.securx",
     initialClipboardProtection: true,
   );
 
@@ -37,29 +37,29 @@ class _MyAppState extends State<MyApp> {
     _fetchDeviceSecurityInfo();
 
     // Set initial copy/paste state from plugin
-    _copyPasteEnable = !_appGuardPlugin.isClipboardProtected.value;
+    _copyPasteEnable = !_secuxPlugin.isClipboardProtected.value;
 
-    _appGuardPlugin.isClipboardProtected.addListener(() {
+    _secuxPlugin.isClipboardProtected.addListener(() {
       setState(() {
-        _copyPasteEnable = !_appGuardPlugin.isClipboardProtected.value;
+        _copyPasteEnable = !_secuxPlugin.isClipboardProtected.value;
       });
     });
 
     // Ensure screenshot protection is set after activity is ready and update UI state
     // Initially, screenshot protection is enabled (restricted).
-    _appGuardPlugin.setScreenshotProtection(enabled: true);
+    _secuxPlugin.setScreenshotProtection(enabled: false);
   }
 
   Future<void> _fetchDeviceSecurityInfo() async {
-    final platformVersion = await _appGuardPlugin.getPlatformVersion;
-    final isDeviceSafe = await _appGuardPlugin.isDeviceSafe;
-    final isDeviceRooted = await _appGuardPlugin.isDeviceRooted;
-    final isDebuggingModeEnabled = await _appGuardPlugin.isDebuggingModeEnabled;
-    final isDeveloperModeEnabled = await _appGuardPlugin.isDeveloperModeEnabled;
-    final isEmulator = await _appGuardPlugin.isEmulator;
-    final isVpnEnabled = await _appGuardPlugin.isVpnEnabled;
-    final isDebuggerAttached = await _appGuardPlugin.isDebuggerAttached;
-    final isAppCloned = await _appGuardPlugin.isAppCloned;
+    final platformVersion = await _secuxPlugin.getPlatformVersion;
+    final isDeviceSafe = await _secuxPlugin.isDeviceSafe;
+    final isDeviceRooted = await _secuxPlugin.isDeviceRooted;
+    final isDebuggingModeEnabled = await _secuxPlugin.isDebuggingModeEnabled;
+    final isDeveloperModeEnabled = await _secuxPlugin.isDeveloperModeEnabled;
+    final isEmulator = await _secuxPlugin.isEmulator;
+    final isVpnEnabled = await _secuxPlugin.isVpnEnabled;
+    final isDebuggerAttached = await _secuxPlugin.isDebuggerAttached;
+    final isAppCloned = await _secuxPlugin.isAppCloned;
 
     setState(() {
       _platformVersion = platformVersion;
@@ -79,7 +79,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(title: const Text('App Guard Plugin')),
+        appBar: AppBar(title: const Text('Securx Plugin')),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
@@ -93,7 +93,7 @@ class _MyAppState extends State<MyApp> {
                 const Text('Checklist', textAlign: TextAlign.center),
                 const Divider(),
                 Text('Is Device Rooted: ${_isDeviceRooted ?? "loading..."}'),
-                Text('Is Debugging Mode Enable: ${_isDebuggingModeEnabled ?? "loading..."}'),
+                Text('Is Debugging Mode Enabled: ${_isDebuggingModeEnabled ?? "loading..."}'),
                 Text('Is Developer Mode Enabled: ${_isDeveloperModeEnabled ?? "loading..."}'),
                 Text('Is Emulator: ${_isEmulator ?? "loading..."}'),
                 Text('Is VPN Enabled: ${_isVpnEnabled ?? "loading..."}'),
@@ -101,7 +101,7 @@ class _MyAppState extends State<MyApp> {
                 Text('Is Debugger Attached: ${_isDebuggerAttached ?? "loading..."}'),
                 Text('Is App Cloned: ${_isAppCloned ?? "loading..."}'),
                 ValueListenableBuilder<bool>(
-                  valueListenable: _appGuardPlugin.isClipboardProtected,
+                  valueListenable: _secuxPlugin.isClipboardProtected,
                   builder: (context, value, _) => Text('Is Copy paste Enabled: ${!value}'),
                 ),
                 const Divider(),
@@ -144,7 +144,7 @@ class _MyAppState extends State<MyApp> {
                       setState(() {
                         _isScreenshotEnabled = value;
                         // When enabled is true, screenshots are restricted.
-                        _appGuardPlugin.setScreenshotProtection(enabled: !_isScreenshotEnabled);
+                        _secuxPlugin.setScreenshotProtection(enabled: !_isScreenshotEnabled);
                       });
                     },
                   ),

@@ -1,6 +1,6 @@
-# Contributing to AppGuard
+# Contributing to Securx
 
-We welcome contributions to the `flutter_app_guard` plugin! Whether it's reporting a bug, suggesting a new feature, or submitting a pull request, your help is greatly appreciated.
+We welcome contributions to the `securx` plugin! Whether it's reporting a bug, suggesting a new feature, or submitting a pull request, your help is greatly appreciated.
 
 Please take a moment to review this document to ensure a smooth contribution process.
 
@@ -8,7 +8,7 @@ Please take a moment to review this document to ensure a smooth contribution pro
 
 ### Reporting Bugs
 
-If you find a bug, please open an issue on our [GitHub Issue Tracker](https://github.com/Rgada28/app_guard/issues). When reporting a bug, please include:
+If you find a bug, please open an issue on our [GitHub Issue Tracker](https://github.com/Rgada28/securx/issues). When reporting a bug, please include:
 
 - **A clear and concise description** of the bug.
 - **Steps to reproduce** the behavior.
@@ -22,7 +22,7 @@ If you find a bug, please open an issue on our [GitHub Issue Tracker](https://gi
 
 ### Suggesting Enhancements / Features
 
-We'd love to hear your ideas for improving `app_guard`! Please open an issue on the [GitHub Issue Tracker](https://github.com/Rgada28/app_guard/issues) and describe:
+We'd love to hear your ideas for improving `securx`! Please open an issue on the [GitHub Issue Tracker](https://github.com/Rgada28/securx/issues) and describe:
 
 - **The problem** you're trying to solve.
 - **Your proposed solution** or feature idea.
@@ -33,10 +33,10 @@ We'd love to hear your ideas for improving `app_guard`! Please open an issue on 
 
 We welcome pull requests for bug fixes, new features, and improvements. To submit a pull request:
 
-1.  **Fork** the `app_guard` repository.
+1.  **Fork** the `securx` repository.
 2.  **Clone** your forked repository to your local machine.
     ```bash
-    git clone [https://github.com/YOUR_USERNAME/app_guard.git](https://github.com/YOUR_USERNAME/app_guard.git)
+    git clone [https://github.com/YOUR_USERNAME/securx.git](https://github.com/YOUR_USERNAME/securx.git)
     ```
 3.  **Create a new branch** for your changes.
     ```bash
@@ -54,7 +54,7 @@ We welcome pull requests for bug fixes, new features, and improvements. To submi
     - Run `flutter analyze`
     - Run `flutter format .`
     - For Android: Open `example/android` in Android Studio and ensure it builds and runs correctly.
-    - For iOS: Open `example/ios/Runner.xcworkspace` in Xcode and ensure it builds and runs correctly. Run `pod lib lint app_guard.podspec` in the `ios` directory to validate your podspec and native code.
+    - For iOS: Open `example/ios/Runner.xcworkspace` in Xcode and ensure it builds and runs correctly. Run `pod lib lint securx.podspec` in the `ios` directory to validate your podspec and native code.
 6.  **Commit your changes** with a clear and concise commit message.
     ```bash
     git commit -m "feat: Add new feature (closes #123)"
@@ -74,4 +74,4 @@ We welcome pull requests for bug fixes, new features, and improvements. To submi
 - **Kotlin (Android):** Adhere to the [Kotlin Coding Conventions](https://kotlinlang.org/docs/coding-conventions.html).
 - **Swift/Objective-C (iOS):** Follow standard Swift/Objective-C coding practices.
 
-Thank you for contributing to `app_guard`!
+Thank you for contributing to `securx`!

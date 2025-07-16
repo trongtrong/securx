@@ -1,4 +1,4 @@
-package com.security.flutter_app_guard.flutter_app_guard
+package com.security.securx.securx
 
 import android.app.Activity
 import android.content.Context
@@ -13,9 +13,9 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 
-/** FlutterAppGuardPlugin */
+/** SexurxPlugin */
 // Implement ActivityAware to get access to the Activity
-class FlutterAppGuardPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
+class SecurxPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
     /// The MethodChannel that will the communication between Flutter and native Android
     ///
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
@@ -28,7 +28,7 @@ class FlutterAppGuardPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
     // Provides the application context.
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         applicationContext = flutterPluginBinding.applicationContext
-        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "flutter_app_guard")
+                channel = MethodChannel(flutterPluginBinding.binaryMessenger, "securx")
         channel.setMethodCallHandler(this)
     }
 
@@ -62,19 +62,19 @@ class FlutterAppGuardPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
             }
             "enableScreenshot" -> {
     if (activity != null) {
-        Log.d("FlutterAppGuard", "Enabling screenshot (clearing FLAG_SECURE)")
+        Log.d("Securx", "Enabling screenshot (clearing FLAG_SECURE)")
         result.success(ScreenshotProtection(activity).turnScreenshotOn())
     } else {
-        Log.e("FlutterAppGuard", "Activity is null when enabling screenshot")
+        Log.e("Securx", "Activity is null when enabling screenshot")
         result.error("UNAVAILABLE", "Activity not available for screenshot protection.", null)
     }
 }
 "disableScreenshot" -> {
     if (activity != null) {
-        Log.d("FlutterAppGuard", "Disabling screenshot (setting FLAG_SECURE)")
+        Log.d("Securx", "Disabling screenshot (setting FLAG_SECURE)")
         result.success(ScreenshotProtection(activity).turnScreenshotOff())
     } else {
-        Log.e("FlutterAppGuard", "Activity is null when disabling screenshot")
+        Log.e("Securx", "Activity is null when disabling screenshot")
         result.error("UNAVAILABLE", "Activity not available for screenshot protection.", null)
     }
 }
