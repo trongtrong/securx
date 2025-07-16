@@ -1,9 +1,12 @@
 name: securx
 description: "A robust mobile security package designed to enhance application resilience against various threats. This package includes features for device integrity checks, secure communication, mobile privacy, and fraud prevention."
 version: 0.0.1
+
 homepage: https://github.com/Rgada28/securx
 repository: https://github.com/Rgada28/securx
 issue_tracker: https://github.com/Rgada28/securx/issues
+
+
 license: BSD-3-Clause
 
 environment:
@@ -19,6 +22,12 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+
+topics:
+  - security
+  - app-guard
+  - android
+  - ios
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

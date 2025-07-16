@@ -8,10 +8,9 @@
   - `isDeviceSafe`
   - `isDeviceRooted`
   - `isDeveloperModeEnabled`
-  - `isDebuggingModeEnable`
+  - `isDebuggingModeEnabled`
   - `isEmulator`
-  - `enableScreenshot`
-  - `disableScreenshot`
+  - `setScreenshotProtection`
   - `isDebuggerAttached`
   - `isAppCloned`
 - Implemented basic Android and iOS native security checks.
