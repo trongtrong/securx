@@ -22,8 +22,8 @@ class Securx {
     bool initialClipboardProtection = false,
   }) {
     // Set initial protection states from the constructor
-    setScreenshotProtection(enabled: initialScreenshotProtection);
-    setClipboardProtection(enabled: initialClipboardProtection);
+    // setScreenshotProtection(enabled: initialScreenshotProtection);
+    // setClipboardProtection(enabled: initialClipboardProtection);
   }
 
   /// Toggles screenshot and screen recording protection.
