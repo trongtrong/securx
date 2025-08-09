@@ -51,26 +51,24 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _fetchDeviceSecurityInfo() async {
-    final platformVersion = await _secuxPlugin.getPlatformVersion;
     final isDeviceSafe = await _secuxPlugin.isDeviceSafe;
     final isDeviceRooted = await _secuxPlugin.isDeviceRooted;
     final isDebuggingModeEnabled = await _secuxPlugin.isDebuggingModeEnabled;
     final isDeveloperModeEnabled = await _secuxPlugin.isDeveloperModeEnabled;
     final isEmulator = await _secuxPlugin.isEmulator;
-    final isVpnEnabled = await _secuxPlugin.isVpnEnabled;
+    // final isVpnEnabled = await _secuxPlugin.isVpnEnabled;
     final isDebuggerAttached = await _secuxPlugin.isDebuggerAttached;
-    final isAppCloned = await _secuxPlugin.isAppCloned;
+    // final isAppCloned = await _secuxPlugin.isAppCloned;
 
     setState(() {
-      _platformVersion = platformVersion;
       _isDeviceSafe = isDeviceSafe;
       _isDeviceRooted = isDeviceRooted;
       _isDebuggingModeEnabled = isDebuggingModeEnabled;
       _isDeveloperModeEnabled = isDeveloperModeEnabled;
       _isEmulator = isEmulator;
-      _isVpnEnabled = isVpnEnabled;
+      // _isVpnEnabled = isVpnEnabled;
       _isDebuggerAttached = isDebuggerAttached;
-      _isAppCloned = isAppCloned;
+      // _isAppCloned = isAppCloned;
     });
   }
 
@@ -92,13 +90,13 @@ class _MyAppState extends State<MyApp> {
                 const Divider(),
                 const Text('Checklist', textAlign: TextAlign.center),
                 const Divider(),
-                Text('Is Device Rooted: ${_isDeviceRooted ?? "loading..."}'),
-                Text('Is Debugging Mode Enabled: ${_isDebuggingModeEnabled ?? "loading..."}'),
-                Text('Is Developer Mode Enabled: ${_isDeveloperModeEnabled ?? "loading..."}'),
-                Text('Is Emulator: ${_isEmulator ?? "loading..."}'),
+                Text('Is Device Rooted: ${_isDeviceRooted ?? "..."}'),
+                Text('Is Debugging Mode Enabled: ${_isDebuggingModeEnabled ?? "..."}'),
+                Text('Is Developer Mode Enabled: ${_isDeveloperModeEnabled ?? "..."}'),
+                Text('Is Emulator: ${_isEmulator ?? "..."}'),
                 Text('Is VPN Enabled: ${_isVpnEnabled ?? "loading..."}'),
                 Text('Is Screenshot Enabled: $_isScreenshotEnabled'),
-                Text('Is Debugger Attached: ${_isDebuggerAttached ?? "loading..."}'),
+                Text('Is Debugger Attached: ${_isDebuggerAttached ?? "..."}'),
                 Text('Is App Cloned: ${_isAppCloned ?? "loading..."}'),
                 ValueListenableBuilder<bool>(
                   valueListenable: _secuxPlugin.isClipboardProtected,

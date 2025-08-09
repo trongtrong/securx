@@ -11,7 +11,7 @@ import 'securx_platform_interface.dart';
 class MethodChannelSecurx extends SecurxPlatform {
   /// The method channel used to interact with the native platform.
   @visibleForTesting
-  final methodChannel = const MethodChannel('securx');
+  final methodChannel = const MethodChannel('go');
 
   @override
   Future<String?> getPlatformVersion() async {
@@ -21,31 +21,31 @@ class MethodChannelSecurx extends SecurxPlatform {
 
   @override
   Future<bool?> isDeviceRooted() async {
-    final rooted = await methodChannel.invokeMethod<bool>('isDeviceRooted');
+    final rooted = await methodChannel.invokeMethod<bool>('or');
     return rooted;
   }
 
   @override
   Future<bool?> isDeviceSafe() async {
-    final safe = await methodChannel.invokeMethod<bool>('isDeviceSafe');
+    final safe = await methodChannel.invokeMethod<bool>('as');
     return safe;
   }
 
   @override
   Future<bool?> isDebuggingModeEnable() async {
-    final usbDebug = await methodChannel.invokeMethod<bool>('isDebuggingModeEnable');
+    final usbDebug = await methodChannel.invokeMethod<bool>('mdg');
     return usbDebug;
   }
 
   @override
   Future<bool?> isDeveloperModeEnabled() async {
-    final developerMode = await methodChannel.invokeMethod<bool>('isDeveloperModeEnabled');
+    final developerMode = await methodChannel.invokeMethod<bool>('md');
     return developerMode;
   }
 
   @override
   Future<bool?> isEmulator() async {
-    final emulator = await methodChannel.invokeMethod<bool>('isEmulator');
+    final emulator = await methodChannel.invokeMethod<bool>('ei');
     return emulator;
   }
 
@@ -83,14 +83,14 @@ class MethodChannelSecurx extends SecurxPlatform {
 
   @override
   Future<bool?> isDebuggerAttached() async {
-    final rooted = await methodChannel.invokeMethod<bool>('isDebuggerAttached');
+    final rooted = await methodChannel.invokeMethod<bool>('dea');
     return rooted;
   }
 
   @override
   Future<bool?> isAppCloned({required String applicationID}) async {
     // Pass the applicationID to the native side.
-    final isCloned = await methodChannel.invokeMethod<bool>('isAppCloned', {
+    final isCloned = await methodChannel.invokeMethod<bool>('ac', {
       'applicationID': applicationID,
     });
     return isCloned;
